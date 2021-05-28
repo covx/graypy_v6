@@ -13,6 +13,7 @@ Modules:
 
 from graypy.handler import (
     GELFUDPHandler,
+    GELFUDPIPv6Handler,
     GELFTCPHandler,
     GELFTLSHandler,
     GELFHTTPHandler,
