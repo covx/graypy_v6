@@ -20,7 +20,7 @@ Install the basic graypy python logging handlers:
 
 .. code-block:: console
 
-    pip install -e git://github.com/covx/graypy_v6.git@0.2.10#egg=graypy
+    pip install -e git://github.com/covx/graypy_v6.git@3.0.1#egg=graypy
 
 Usage
 =====
