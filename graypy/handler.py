@@ -769,3 +769,9 @@ class GELFHTTPHandler(BaseGELFHandler):
             host=self.host, port=self.port, timeout=self.timeout
         )
         connection.request("POST", self.path, pickle, self.headers)
+
+
+class GELFUDPIPv6Handler(GELFUDPHandler):
+    """GELF UDP with IP v6 support handler"""
+    def makeSocket(self):
+        return socket.socket(socket.AF_INET6, socket.SOCK_DGRAM)

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""setup.py for graypy"""
+"""setup.py for graypy_v6"""
 
 import codecs
 import re
@@ -63,13 +63,13 @@ class PyTest(test):
 setup(
     name="graypy",
     version=VERSION,
-    description="Python logging handlers that send messages in the Graylog Extended Log Format (GELF).",
+    description="Python logging handlers that send messages in the Graylog Extended Log Format (GELF) with IPv6 support.",
     long_description=open("README.rst").read(),
     long_description_content_type="text/x-rst",
-    keywords="logging gelf graylog2 graylog udp amqp",
-    author="Sever Banesiu",
+    keywords="logging gelf graylog2 graylog udp amqp IPv6",
+    author="Sever Banesiu, Maxim Chernyatevich",
     author_email="banesiu.sever@gmail.com",
-    url="https://github.com/severb/graypy",
+    url="https://github.com/covx/graypy_v6",
     license="BSD License",
     packages=find_packages(),
     include_package_data=True,

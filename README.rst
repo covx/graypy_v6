@@ -1,22 +1,6 @@
 ######
-graypy
+graypy_v6
 ######
-
-.. image:: https://img.shields.io/pypi/v/graypy.svg
-    :target: https://pypi.python.org/pypi/graypy
-    :alt: PyPI Status
-
-.. image:: https://travis-ci.org/severb/graypy.svg?branch=master
-    :target: https://travis-ci.org/severb/graypy
-    :alt: Build Status
-
-.. image:: https://readthedocs.org/projects/graypy/badge/?version=stable
-    :target: https://graypy.readthedocs.io/en/stable/?badge=stable
-    :alt: Documentation Status
-
-.. image:: https://codecov.io/gh/severb/graypy/branch/master/graph/badge.svg
-    :target: https://codecov.io/gh/severb/graypy
-    :alt: Coverage Status
 
 Description
 ===========
@@ -24,7 +8,7 @@ Description
 Python logging handlers that send log messages in the
 Graylog Extended Log Format (GELF_).
 
-graypy supports sending GELF logs to both Graylog2 and Graylog3 servers.
+graypy_v6 supports sending GELF logs to both Graylog2 and Graylog3 servers with IPv6 protocol.
 
 Installing
 ==========
@@ -36,28 +20,7 @@ Install the basic graypy python logging handlers:
 
 .. code-block:: console
 
-    pip install graypy
-
-Install with requirements for ``GELFRabbitHandler``:
-
-.. code-block:: console
-
-    pip install graypy[amqp]
-
-Using easy_install
-------------------
-
-Install the basic graypy python logging handlers:
-
-.. code-block:: console
-
-    easy_install graypy
-
-Install with requirements for ``GELFRabbitHandler``:
-
-.. code-block:: console
-
-    easy_install graypy[amqp]
+    pip install -e git://github.com/covx/graypy_v6.git@0.2.10#egg=graypy
 
 Usage
 =====
@@ -68,6 +31,7 @@ graypy sends GELF logs to a Graylog server via subclasses of the python
 Below is the list of ready to run GELF logging handlers defined by graypy:
 
 * ``GELFUDPHandler`` - UDP log forwarding
+* ``GELFUDPIPv6Handler`` - UDP log forwarding with IPv6 protocol
 * ``GELFTCPHandler`` - TCP log forwarding
 * ``GELFTLSHandler`` - TCP log forwarding with TLS support
 * ``GELFHTTPHandler`` - HTTP log forwarding
@@ -150,6 +114,34 @@ new handler in your ``settings.py``:
                 'level': 'WARNING',
                 'class': 'graypy.GELFUDPHandler',
                 'host': 'localhost',
+                'port': 12201,
+            },
+        },
+        'loggers': {
+            'django.request': {
+                'handlers': ['graypy'],
+                'level': 'ERROR',
+                'propagate': True,
+            },
+        },
+    }
+
+Django Logging with IPv6
+------------------------
+
+It's easy to integrate ``graypy_v6`` with IPv6 Django's logging settings. Just add a
+new handler in your ``settings.py``:
+
+.. code-block:: python
+
+    LOGGING = {
+        'version': 1,
+        # other dictConfig keys here...
+        'handlers': {
+            'graypy': {
+                'level': 'WARNING',
+                'class': 'graypy.GELFUDPIPv6Handler',
+                'host': '[::1]',
                 'port': 12201,
             },
         },
@@ -268,6 +260,7 @@ Contributors
   * Daniel Miller
   * Tushar Makkar
   * Nathan Klapstein
+  * Maxim Chernyatevich
 
 .. _GELF: https://docs.graylog.org/en/latest/pages/gelf.html
 .. _logging.Handler: https://docs.python.org/3/library/logging.html#logging.Handler
