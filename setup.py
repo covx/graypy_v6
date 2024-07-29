@@ -108,4 +108,5 @@ setup(
         "Topic :: System :: Logging",
     ],
     cmdclass={"test": PyTest, "lint": Pylint},
+    install_requires=["setuptools<72"],
 )
